@@ -20,6 +20,8 @@
 #import "NSString+Gpx.h"
 // Window
 #import "LWindow.h"
+// Annotation
+#import "LAnnotation.h"
 
 // Singleton
 static LXLocation *sharedPlugin;
@@ -27,17 +29,18 @@ static LXLocation *sharedPlugin;
 static NSString * const gMapUrlRequest   = @"http://maps.google.com/maps/api/geocode/json?address=%@,%@,%@,%@&sensor=false";
 // Default Alert Messages
 static NSString * const defaultErrorDesc = @"Something went wrong!\nCannot find the address!";
+static NSString * const addressNotFound  = @"Address not found!";
 static NSString * const generateDone     = @"File %@.gpx created! This one has been added to your current project in the Group named GPX.";
 
 
 @interface LXLocation()
 
-@property (nonatomic, strong) NSBundle          * bundle;
-@property (nonatomic, copy  ) NSString          * currentWorkspaceFilePath;
-@property (nonatomic, copy  ) NSString          * currentXcodeProject;
-@property (nonatomic, strong) NSMenuItem        * actionItem;
-@property (nonatomic, strong) LWindow           * locationsWindow;
-@property (strong ,nonatomic) NSProgressIndicator *progressIndicator;
+@property (nonatomic, strong) NSBundle    * bundle;
+@property (nonatomic, copy  ) NSString    * currentWorkspaceFilePath;
+@property (nonatomic, copy  ) NSString    * currentXcodeProject;
+@property (nonatomic, strong) NSMenuItem  * actionItem;
+@property (nonatomic, strong) LWindow     * locationsWindow;
+@property (nonatomic, strong) LAnnotation * pAnnotation;
 
 // IBOutlets
 @property (weak) IBOutlet NSTextField * filenameField;
@@ -47,6 +50,8 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 @property (weak) IBOutlet NSTextField * countryField;
 @property (weak) IBOutlet NSButton    * cancelBtn;
 @property (weak) IBOutlet NSButton    * generateBtn;
+@property (weak) IBOutlet MKMapView   * mapView;
+@property (weak) IBOutlet NSTextField * addressLbl;
 
 @end
 
@@ -100,12 +105,19 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
                                              selector:@selector(workspaceWindowDidBecomeMain:)
                                                  name:NSWindowDidBecomeMainNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(findLocationFromPoint:)
+                                                 name:@"findLocationFromPointNotification"
+                                               object:nil];
 }
 
 - (void)removeObservers {
     // Remove from notification center
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:NSWindowDidBecomeMainNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"findLocationFromPointNotification"
                                                   object:nil];
 }
 
@@ -125,6 +137,17 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
         self.currentWorkspaceFilePath                 = pathString;
         // Enable action button
         [self.actionItem setTarget:self];
+    }
+}
+
+- (void)findLocationFromPoint:(NSNotification *)notification{
+    if([notification.object isKindOfClass:[CLLocation class]]){
+        if(self.pAnnotation){
+           [self.mapView removeAnnotation:self.pAnnotation.annotation];
+            self.pAnnotation = nil;
+        }
+        CLLocation *loc = notification.object;
+        [self findAddress:loc.coordinate];
     }
 }
 
@@ -164,6 +187,88 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
     }
     else
         return YES;
+}
+
+/*
+ * Get address from coordinates
+ */
+-(void)findAddress:(CLLocationCoordinate2D)location
+{
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Form url
+        NSString *url = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false",location.latitude,location.longitude];
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+        // Get coordinates from address informed
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   if(error || !data){
+                                       // Error -> show alert
+                                       [self showAlert:defaultErrorDesc
+                                          withDelegate:nil];
+                                       return;
+                                   }
+                                   NSError *errorJson = nil;
+                                   id JSON = [NSJSONSerialization JSONObjectWithData:data
+                                                                             options:NSJSONReadingMutableContainers
+                                                                               error:&errorJson];
+                                   // Check the response status
+                                   if(!errorJson){
+                                       // Does the address exist ?
+                                       if([[JSON objectForKey:@"status"] isEqualToString:@"OK"]){
+                                           NSLog(@"status OK");
+                                           if([JSON objectForKey:@"results"]
+                                              && [[JSON objectForKey:@"results"] count] > 0){
+                                               // Save address
+                                               NSString *city    = @"";
+                                               NSString *country = @"";
+                                               NSString *address = @"";
+                                               NSString *zipCode = @"";
+                                               for(NSDictionary* ar in JSON[@"results"][0][@"address_components"]){
+                                                   if([ar objectForKey:@"types"]){
+                                                       NSString *type = [ar objectForKey:@"types"][0];
+                                                       NSString *value = [ar objectForKey:@"long_name"];
+                                                       if([type isEqualToString:@"route"]){
+                                                           address = value;
+                                                       }
+                                                       else if ([type isEqualToString:@"locality"]){
+                                                           city = value;
+                                                       }
+                                                       else if ([type isEqualToString:@"country"]){
+                                                           country = value;
+                                                       }
+                                                       else if ([type isEqualToString:@"postal_code"]){
+                                                           zipCode = value;
+                                                       }
+                                                   }
+                                               }
+                                               if([city isEqualToString:@""] || [country isEqualToString:@""]){
+                                                   // Not found
+                                                   [self showAlert:addressNotFound
+                                                      withDelegate:nil];
+                                               }
+                                               else{
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       // Adds annotation
+                                                       self.pAnnotation = [[LAnnotation alloc] initWithCity:city
+                                                                                                    country:country
+                                                                                                    address:address
+                                                                                                    zipCode:zipCode
+                                                                                                   location:location];
+                                                       [self.mapView addAnnotation:self.pAnnotation.annotation];
+                                                       [self.addressLbl setStringValue:[self.pAnnotation concatAddress]];
+                                                   });
+                                               }
+                                           }
+                                       }
+                                   }
+                                   else{
+                                       // Error -> Wrong address
+                                       [self showAlert:defaultErrorDesc
+                                          withDelegate:nil];
+                                   }
+                               }];
+    });
 }
 
 /*

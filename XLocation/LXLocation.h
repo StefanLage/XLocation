@@ -7,6 +7,7 @@
 //
 
 #import <AppKit/AppKit.h>
+#import <MapKit/MapKit.h>
 
 @interface LXLocation : NSObject
 
