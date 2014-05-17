@@ -107,18 +107,21 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="heQ-R5-LkF">
-                        <rect key="frame" x="201" y="13" width="115" height="32"/>
+                        <rect key="frame" x="208" y="13" width="115" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Generate GPX" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H7v-27-pfN">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                         </buttonCell>
                         <connections>
                             <action selector="generate:" target="-2" id="akp-eG-vWS"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uke-h4-DEa">
-                        <rect key="frame" x="73" y="13" width="68" height="32"/>
+                        <rect key="frame" x="90" y="13" width="68" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Il-1c-axt">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
