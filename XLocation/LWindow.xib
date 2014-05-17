@@ -10,10 +10,12 @@
                 <outlet property="addressField" destination="jfU-v4-hS5" id="1e8-5U-wrD"/>
                 <outlet property="addressLbl" destination="Z1U-ys-40f" id="Kor-bN-68C"/>
                 <outlet property="cancelBtn" destination="C3f-R6-22B" id="kbb-ow-eIg"/>
+                <outlet property="cancelMap" destination="Kar-cw-El3" id="qBB-sp-rwC"/>
                 <outlet property="cityField" destination="b2b-N5-z1X" id="guk-MX-wVq"/>
                 <outlet property="countryField" destination="lE9-V9-f2s" id="hjR-PK-S82"/>
                 <outlet property="filenameField" destination="ZeR-uc-jm1" id="bAF-XS-oiN"/>
                 <outlet property="generateBtn" destination="2T5-UE-OtS" id="irB-JD-Nlj"/>
+                <outlet property="generateMap" destination="Owf-cN-HsX" id="Ue6-TG-LGa"/>
                 <outlet property="mapView" destination="BW8-61-FRb" id="upC-Un-AZK"/>
                 <outlet property="postalCodeField" destination="i37-HG-r0t" id="tm5-yp-z0P"/>
             </connections>
@@ -53,6 +55,9 @@
 DQ
 </string>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="generateFromMap:" target="-2" id="YcJ-Ca-QnY"/>
+                                            </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kar-cw-El3">
                                             <rect key="frame" x="105" y="-290" width="115" height="32"/>
@@ -111,7 +116,7 @@ DQ
 </string>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="generate:" target="-2" id="Nx1-xc-p5T"/>
+                                                <action selector="generateFromAddress:" target="-2" id="M3o-MW-6hj"/>
                                             </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C3f-R6-22B">

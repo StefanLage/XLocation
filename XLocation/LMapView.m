@@ -8,7 +8,21 @@
 
 #import "LMapView.h"
 
+@interface LMapView ()
+
+@property (nonatomic) MKCoordinateRegion bkRegion;
+
+@end
+
 @implementation LMapView
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        _bkRegion = self.region;
+    }
+    return self;
+}
 
 /*
  * Handle right click on the map
@@ -22,6 +36,10 @@
     // Broadcast the location to find
     [[NSNotificationCenter defaultCenter] postNotificationName:@"findLocationFromPointNotification"
                                                         object:loc];
+}
+
+-(void)resetRegion{
+    self.region = self.bkRegion;
 }
 
 @end

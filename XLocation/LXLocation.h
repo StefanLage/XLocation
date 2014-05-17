@@ -12,6 +12,7 @@
 @interface LXLocation : NSObject
 
 - (IBAction)cancel:(id)sender;
-- (IBAction)generate:(id)sender;
+- (IBAction)generateFromMap:(id)sender;
+- (IBAction)generateFromAddress:(id)sender;
 
 @end

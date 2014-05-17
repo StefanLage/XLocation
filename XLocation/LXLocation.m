@@ -22,14 +22,18 @@
 #import "LWindow.h"
 // Annotation
 #import "LAnnotation.h"
+// MapView
+#import "LMapView.h"
 
 // Singleton
 static LXLocation *sharedPlugin;
 // Google Map URL Request
-static NSString * const gMapUrlRequest   = @"http://maps.google.com/maps/api/geocode/json?address=%@,%@,%@,%@&sensor=false";
+static NSString * const gMapUrlRequestFromAddress     = @"http://maps.google.com/maps/api/geocode/json?address=%@,%@,%@,%@&sensor=false";
+static NSString * const gMapUrlRequestFromCoordinates = @"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false";
 // Default Alert Messages
 static NSString * const defaultErrorDesc = @"Something went wrong!\nCannot find the address!";
 static NSString * const addressNotFound  = @"Address not found!";
+static NSString * const noPointSelected  = @"Please select a location first!";
 static NSString * const generateDone     = @"File %@.gpx created! This one has been added to your current project in the Group named GPX.";
 
 
@@ -50,7 +54,9 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 @property (weak) IBOutlet NSTextField * countryField;
 @property (weak) IBOutlet NSButton    * cancelBtn;
 @property (weak) IBOutlet NSButton    * generateBtn;
-@property (weak) IBOutlet MKMapView   * mapView;
+@property (weak) IBOutlet NSButton    * cancelMap;
+@property (weak) IBOutlet NSButton    * generateMap;
+@property (weak) IBOutlet LMapView    * mapView;
 @property (weak) IBOutlet NSTextField * addressLbl;
 
 @end
@@ -142,10 +148,7 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 
 - (void)findLocationFromPoint:(NSNotification *)notification{
     if([notification.object isKindOfClass:[CLLocation class]]){
-        if(self.pAnnotation){
-           [self.mapView removeAnnotation:self.pAnnotation.annotation];
-            self.pAnnotation = nil;
-        }
+        [self cleanMap];
         CLLocation *loc = notification.object;
         [self findAddress:loc.coordinate];
     }
@@ -196,7 +199,7 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Form url
-        NSString *url = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false",location.latitude,location.longitude];
+        NSString *url = [NSString stringWithFormat:gMapUrlRequestFromCoordinates,location.latitude,location.longitude];
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
         // Get coordinates from address informed
         [NSURLConnection sendAsynchronousRequest:request
@@ -278,7 +281,7 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 -(void)generateGpx:(NSString*)filename address:(NSString*)ad city:(NSString*)ci postalCode:(NSString*)zip country:(NSString*)co{
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Form url
-        NSString *url = [NSString stringWithFormat:gMapUrlRequest, ad, zip, ci, co];
+        NSString *url = [NSString stringWithFormat:gMapUrlRequestFromAddress, ad, zip, ci, co];
         NSData *temp  = [url dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         url           = [[[NSString alloc] initWithData:temp encoding:NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@" " withString:@"+"];
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
@@ -306,34 +309,14 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
                                                // Save coordinates
                                                NSNumber *lat      = JSON[@"results"][0][@"geometry"][@"location"][@"lat"];
                                                NSNumber *lng      = JSON[@"results"][0][@"geometry"][@"location"][@"lng"];
-
-                                               XCProject* project = [[XCProject alloc] initWithFilePath:self.currentXcodeProject];
-                                               XCGroup* group     = [project groupWithPathFromRoot:@"GPX"];
-                                               // GPX Group doesn't exist ?!
-                                               if(!group){
-                                                   [[project rootGroup] addGroupWithPath:@"GPX"];
-                                                   // Re-init it
-                                                   group          = [project groupWithPathFromRoot:@"GPX"];
-                                                   [project save];
-                                               }
-                                               // Create a gpx file source
-                                               XCSourceFileDefinition* sourceFileDefinition = [[XCSourceFileDefinition alloc] initWithName:[NSString stringWithFormat:@"%@.gpx", filename]
-                                                                                                                                      text:[NSString generateGpxWithFilename:filename
-                                                                                                                                                                    latitude:lat
-                                                                                                                                                                   longitude:lng
-                                                                                                                                                                     address:ad
-                                                                                                                                                                        city:ci
-                                                                                                                                                                     country:co
-                                                                                                                                                                         zip:zip]
-                                                                                                                                      type:GPX];
-                                               // Add it to the current xcode project
-                                               [group addSourceFile:sourceFileDefinition];
-                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                   [project save];
-                                                   // Everything done -> show alert
-                                                   [self showAlert:[NSString stringWithFormat:generateDone, filename]
-                                                      withDelegate:self];
-                                               });
+                                               // Save the file
+                                               [self generateGpxWithFilename:filename
+                                                                     address:ad
+                                                                        city:ci
+                                                                  postalCode:zip
+                                                                     country:co
+                                                                         lat:lat
+                                                                         lng:lng];
                                            }
                                        }
                                    }
@@ -344,6 +327,50 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
                                    }
                                }];
     });
+}
+
+-(void)generateGpxWithFilename:(NSString*)filename address:(NSString*)ad city:(NSString*)ci postalCode:(NSString*)zip country:(NSString*)co lat:(NSNumber*)lat lng:(NSNumber*)lng{
+    // Be sure there is no space in the filename
+    filename = [filename stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    
+    XCProject* project = [[XCProject alloc] initWithFilePath:self.currentXcodeProject];
+    XCGroup* group     = [project groupWithPathFromRoot:@"GPX"];
+    // GPX Group doesn't exist ?!
+    if(!group){
+        [[project rootGroup] addGroupWithPath:@"GPX"];
+        // Re-init it
+        group          = [project groupWithPathFromRoot:@"GPX"];
+        [project save];
+    }
+    // Create a gpx file source
+    XCSourceFileDefinition* sourceFileDefinition = [[XCSourceFileDefinition alloc] initWithName:[NSString stringWithFormat:@"%@.gpx", filename]
+                                                                                           text:[NSString generateGpxWithFilename:filename
+                                                                                                                         latitude:lat
+                                                                                                                        longitude:lng
+                                                                                                                          address:ad
+                                                                                                                             city:ci
+                                                                                                                          country:co
+                                                                                                                              zip:zip]
+                                                                                           type:GPX];
+    // Add it to the current xcode project
+    [group addSourceFile:sourceFileDefinition];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [project save];
+        // Everything done -> show alert
+        [self showAlert:[NSString stringWithFormat:generateDone, filename]
+           withDelegate:self];
+    });
+}
+
+/*
+ * Remove annotation from the map + reset addressLbl text
+ */
+-(void)cleanMap{
+    if(self.pAnnotation){
+        [self.mapView removeAnnotation:self.pAnnotation.annotation];
+        self.pAnnotation = nil;
+    }
+    [self.addressLbl setStringValue:@"?"];
 }
 
 #pragma mark - Modal delegate
@@ -382,6 +409,10 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
  * Enable / Disable the buttons
  */
 -(void)enableDisableActions:(BOOL)value{
+    // Disable TabItem 1
+    [[self cancelMap] setEnabled:value];
+    [[self generateMap] setEnabled:value];
+    // Disable TabItem 2
     [[self cancelBtn] setEnabled:value];
     [[self generateBtn] setEnabled:value];
 }
@@ -391,13 +422,19 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
  *  Set filenameField as first responder
  */
 -(void)resetFields{
+    // Reset all textfields
     [self.filenameField setStringValue:@""];
     [self.addressField setStringValue:@""];
     [self.cityField setStringValue:@""];
     [self.postalCodeField setStringValue:@""];
     [self.countryField setStringValue:@""];
     [self.filenameField becomeFirstResponder];
-    
+
+    // Clean the map
+    [self cleanMap];
+
+    [self.mapView resetRegion];
+
     // Enable button
     [self enableDisableActions:YES];
 }
@@ -422,15 +459,13 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 /*
  * Start the process to generate a gpx
  */
-- (IBAction)generate:(id)sender {
+- (IBAction)generateFromAddress:(id)sender {
     // Save values
     __block NSString *address  = ([[self.addressField stringValue] isEqualToString:@""]) ? @"Downtown" : [self.addressField stringValue];
     __block NSString *city     = [self.cityField stringValue];
     __block NSString *filename = ([[self.filenameField stringValue] isEqualToString:@""]) ? city : [self.filenameField stringValue];
     __block NSString *pCode    = [self.postalCodeField stringValue];
     __block NSString *country  = [self.countryField stringValue];
-    // Be sure there is no space in the filename
-    filename = [filename stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     // Continue ?
     if([self isRequiredInformed:city country:country]){
         // Disable button
@@ -441,6 +476,37 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
                      city:city
                postalCode:pCode
                   country:country];
+    }
+}
+
+- (IBAction)generateFromMap:(id)sender {
+    if(!self.pAnnotation){
+        // No point selected
+        [self showAlert:noPointSelected
+           withDelegate:nil];
+        return;
+    }
+    else{
+        NSString *address  = self.pAnnotation.address;
+        NSString *city     = self.pAnnotation.city;
+        NSString *filename = self.pAnnotation.city;
+        NSString *pCode    = self.pAnnotation.zipCode;
+        NSString *country  = self.pAnnotation.country;
+        NSNumber *lat      = @(self.pAnnotation.annotation.coordinate.latitude);
+        NSNumber *lng      = @(self.pAnnotation.annotation.coordinate.longitude);
+        // Continue ?
+        if([self isRequiredInformed:city country:country]){
+            // Disable button
+            [self enableDisableActions:NO];
+            // Generate the file
+            [self generateGpxWithFilename:filename
+                                  address:address
+                                     city:city
+                               postalCode:pCode
+                                  country:country
+                                      lat:lat
+                                      lng:lng];
+        }
     }
 }
 

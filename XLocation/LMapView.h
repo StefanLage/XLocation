@@ -10,4 +10,6 @@
 
 @interface LMapView : MKMapView
 
+-(void)resetRegion;
+
 @end
