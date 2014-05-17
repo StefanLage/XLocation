@@ -12,6 +12,8 @@
 		F80094C919238C230005112D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80094C819238C230005112D /* Foundation.framework */; };
 		F80094CF19238C230005112D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F80094CD19238C230005112D /* InfoPlist.strings */; };
 		F80094D219238C230005112D /* LXLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F80094D119238C230005112D /* LXLocation.m */; };
+		F80326DE1927EC7500BE9148 /* LMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = F80326DD1927EC7500BE9148 /* LMapView.m */; };
+		F82433FA1928092D00B20336 /* LAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F82433F91928092D00B20336 /* LAnnotation.m */; };
 		F865D14E1923C03600010DE7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F865D14D1923C03600010DE7 /* Cocoa.framework */; };
 		F87CAFCF1923FBCE007BDCB5 /* DVTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F87CAFCE1923FBCE007BDCB5 /* DVTKit.framework */; };
 		F87CAFD11923FBD4007BDCB5 /* DVTFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F87CAFD01923FBD4007BDCB5 /* DVTFoundation.framework */; };
@@ -20,6 +22,7 @@
 		F89831CB1926DD6C00839785 /* LWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F89831CA1926DD6C00839785 /* LWindow.m */; };
 		F8AC30F11926BF6400E07ECB /* LWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AC30F01926BF6400E07ECB /* LWindow.xib */; };
 		F8B1215C1926607D00BC4756 /* NSString+Gpx.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1215B1926607D00BC4756 /* NSString+Gpx.m */; };
+		F8BAE4411927D5A400A0FAA7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8BAE4401927D5A400A0FAA7 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,10 @@
 		F80094D019238C230005112D /* LXLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LXLocation.h; sourceTree = "<group>"; };
 		F80094D119238C230005112D /* LXLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXLocation.m; sourceTree = "<group>"; };
 		F80094D319238C230005112D /* XLocation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XLocation-Prefix.pch"; sourceTree = "<group>"; };
+		F80326DC1927EC7500BE9148 /* LMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMapView.h; sourceTree = "<group>"; };
+		F80326DD1927EC7500BE9148 /* LMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMapView.m; sourceTree = "<group>"; };
+		F82433F81928092D00B20336 /* LAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LAnnotation.h; path = Classes/LAnnotation.h; sourceTree = "<group>"; };
+		F82433F91928092D00B20336 /* LAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LAnnotation.m; path = Classes/LAnnotation.m; sourceTree = "<group>"; };
 		F865D14D1923C03600010DE7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F87CAFC61923DD9D007BDCB5 /* DVTDualProxyWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DVTDualProxyWindow.h; path = "Xcode-Private-Classes/DVTDualProxyWindow.h"; sourceTree = "<group>"; };
 		F87CAFC71923DD9D007BDCB5 /* DVTFilePath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DVTFilePath.h; path = "Xcode-Private-Classes/DVTFilePath.h"; sourceTree = "<group>"; };
@@ -51,6 +58,7 @@
 		F8AC30F01926BF6400E07ECB /* LWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LWindow.xib; sourceTree = "<group>"; };
 		F8B1215A1926607D00BC4756 /* NSString+Gpx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Gpx.h"; path = "Categories/NSString+Gpx.h"; sourceTree = "<group>"; };
 		F8B1215B1926607D00BC4756 /* NSString+Gpx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Gpx.m"; path = "Categories/NSString+Gpx.m"; sourceTree = "<group>"; };
+		F8BAE4401927D5A400A0FAA7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8BAE4411927D5A400A0FAA7 /* MapKit.framework in Frameworks */,
 				F865D14E1923C03600010DE7 /* Cocoa.framework in Frameworks */,
 				F87CAFCF1923FBCE007BDCB5 /* DVTKit.framework in Frameworks */,
 				F87CAFD11923FBD4007BDCB5 /* DVTFoundation.framework in Frameworks */,
@@ -93,6 +102,7 @@
 		F80094C519238C230005112D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8BAE4401927D5A400A0FAA7 /* MapKit.framework */,
 				F87CAFD21923FBF7007BDCB5 /* IDEFoundation.framework */,
 				F87CAFD31923FBF7007BDCB5 /* IDEKit.framework */,
 				F87CAFD01923FBD4007BDCB5 /* DVTFoundation.framework */,
@@ -108,7 +118,10 @@
 		F80094CA19238C230005112D /* XLocation */ = {
 			isa = PBXGroup;
 			children = (
+				F82433F71928089400B20336 /* Classes */,
 				F8B121591926603100BC4756 /* Categories */,
+				F80326DC1927EC7500BE9148 /* LMapView.h */,
+				F80326DD1927EC7500BE9148 /* LMapView.m */,
 				F89831C91926DD6C00839785 /* LWindow.h */,
 				F89831CA1926DD6C00839785 /* LWindow.m */,
 				F8AC30F01926BF6400E07ECB /* LWindow.xib */,
@@ -128,6 +141,15 @@
 				F80094D319238C230005112D /* XLocation-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F82433F71928089400B20336 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F82433F81928092D00B20336 /* LAnnotation.h */,
+				F82433F91928092D00B20336 /* LAnnotation.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		F87CAFC51923DD26007BDCB5 /* Xcode-Private-Classes */ = {
@@ -253,8 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F82433FA1928092D00B20336 /* LAnnotation.m in Sources */,
 				F89831CB1926DD6C00839785 /* LWindow.m in Sources */,
 				F8B1215C1926607D00BC4756 /* NSString+Gpx.m in Sources */,
+				F80326DE1927EC7500BE9148 /* LMapView.m in Sources */,
 				F80094D219238C230005112D /* LXLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
