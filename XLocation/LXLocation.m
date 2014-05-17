@@ -367,7 +367,7 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
  */
 -(void)cleanMap{
     if(self.pAnnotation){
-        [self.mapView removeAnnotation:self.pAnnotation.annotation];
+        [self.mapView removeAnnotations:self.mapView.annotations];
         self.pAnnotation = nil;
     }
     [self.addressLbl setStringValue:@"?"];
