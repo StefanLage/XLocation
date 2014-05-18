@@ -432,7 +432,7 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 
     // Clean the map
     [self cleanMap];
-
+    // Reset map region
     [self.mapView resetRegion];
 
     // Enable button
@@ -464,6 +464,8 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
     __block NSString *address  = ([[self.addressField stringValue] isEqualToString:@""]) ? @"Downtown" : [self.addressField stringValue];
     __block NSString *city     = [self.cityField stringValue];
     __block NSString *filename = ([[self.filenameField stringValue] isEqualToString:@""]) ? city : [self.filenameField stringValue];
+    filename                   = [[NSString alloc] initWithData:[filename dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]
+                                                       encoding:NSASCIIStringEncoding];
     __block NSString *pCode    = [self.postalCodeField stringValue];
     __block NSString *country  = [self.countryField stringValue];
     // Continue ?
@@ -489,7 +491,8 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
     else{
         NSString *address  = self.pAnnotation.address;
         NSString *city     = self.pAnnotation.city;
-        NSString *filename = self.pAnnotation.city;
+        NSString *filename = [[NSString alloc] initWithData:[city dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]
+                                                   encoding:NSASCIIStringEncoding];
         NSString *pCode    = self.pAnnotation.zipCode;
         NSString *country  = self.pAnnotation.country;
         NSNumber *lat      = @(self.pAnnotation.annotation.coordinate.latitude);
