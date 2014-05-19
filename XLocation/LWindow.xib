@@ -25,7 +25,7 @@
         <window identifier="LocationWindow" title="XLocation" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="JQo-vc-hRj">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="0.0" y="800" width="523" height="341"/>
+            <rect key="contentRect" x="0.0" y="0.0" width="523" height="341"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" autoresizesSubviews="NO" id="tQI-j8-6wj">
                 <rect key="frame" x="0.0" y="0.0" width="523" height="341"/>
