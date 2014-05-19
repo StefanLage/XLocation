@@ -333,35 +333,41 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 -(void)generateGpxWithFilename:(NSString*)filename address:(NSString*)ad city:(NSString*)ci postalCode:(NSString*)zip country:(NSString*)co lat:(NSNumber*)lat lng:(NSNumber*)lng{
     // Project found ?
     if([[NSFileManager defaultManager] fileExistsAtPath:self.currentXcodeProject]){
-        // Be sure there is no space in the filename
-        filename = [filename stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-        XCProject* project = [[XCProject alloc] initWithFilePath:self.currentXcodeProject];
-        XCGroup* group     = [project groupWithPathFromRoot:@"GPX"];
-        // GPX Group doesn't exist ?!
-        if(!group){
-            [[project rootGroup] addGroupWithPath:@"GPX"];
-            // Re-init it
-            group          = [project groupWithPathFromRoot:@"GPX"];
-            [project save];
+        @try {
+            // Be sure there is no space in the filename
+            filename = [filename stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+            XCProject* project = [[XCProject alloc] initWithFilePath:self.currentXcodeProject];
+            XCGroup* group     = [project groupWithPathFromRoot:@"GPX"];
+            // GPX Group doesn't exist ?!
+            if(!group){
+                [[project rootGroup] addGroupWithPath:@"GPX"];
+                // Re-init it
+                group          = [project groupWithPathFromRoot:@"GPX"];
+                [project save];
+            }
+            // Create a gpx file source
+            XCSourceFileDefinition* sourceFileDefinition = [[XCSourceFileDefinition alloc] initWithName:[NSString stringWithFormat:@"%@.gpx", filename]
+                                                                                                   text:[NSString generateGpxWithFilename:filename
+                                                                                                                                 latitude:lat
+                                                                                                                                longitude:lng
+                                                                                                                                  address:ad
+                                                                                                                                     city:ci
+                                                                                                                                  country:co
+                                                                                                                                      zip:zip]
+                                                                                                   type:GPX];
+            // Add it to the current xcode project
+            [group addSourceFile:sourceFileDefinition];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [project save];
+                // Everything done -> show alert
+                [self showAlert:[NSString stringWithFormat:generateDone, filename]
+                   withDelegate:self];
+            });
         }
-        // Create a gpx file source
-        XCSourceFileDefinition* sourceFileDefinition = [[XCSourceFileDefinition alloc] initWithName:[NSString stringWithFormat:@"%@.gpx", filename]
-                                                                                               text:[NSString generateGpxWithFilename:filename
-                                                                                                                             latitude:lat
-                                                                                                                            longitude:lng
-                                                                                                                              address:ad
-                                                                                                                                 city:ci
-                                                                                                                              country:co
-                                                                                                                                  zip:zip]
-                                                                                               type:GPX];
-        // Add it to the current xcode project
-        [group addSourceFile:sourceFileDefinition];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [project save];
-            // Everything done -> show alert
-            [self showAlert:[NSString stringWithFormat:generateDone, filename]
+        @catch (NSException *exception) {
+            [self showAlert:[NSString stringWithFormat:projectNotFound, self.currentXcodeProject]
                withDelegate:self];
-        });
+        }
     }
     else{
         [self showAlert:[NSString stringWithFormat:projectNotFound, self.currentXcodeProject]
