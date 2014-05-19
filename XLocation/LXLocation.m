@@ -137,9 +137,11 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
         NSWindowController *workspaceWindowController = (NSWindowController *)workspaceWindow.windowController;
         IDEWorkspace *workspace                       = (IDEWorkspace *)[workspaceWindowController valueForKey:@"_workspace"];
         DVTFilePath *representingFilePath             = workspace.representingFilePath;
-        NSString *pathString                          = [representingFilePath.pathString stringByReplacingOccurrencesOfString:representingFilePath.fileName withString:@""];
+        NSString *pathString                          = [representingFilePath.pathString stringByReplacingOccurrencesOfString:representingFilePath.fileName
+                                                                                                                   withString:@""];
         // Save these informations
-        self.currentXcodeProject                      = representingFilePath.pathString;
+        self.currentXcodeProject                      = [representingFilePath.pathString stringByReplacingOccurrencesOfString:@".xcworkspace"
+                                                                                                                   withString:@".xcodeproj"];
         self.currentWorkspaceFilePath                 = pathString;
         // Enable action button
         [self.actionItem setTarget:self];
@@ -219,7 +221,6 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
                                    if(!errorJson){
                                        // Does the address exist ?
                                        if([[JSON objectForKey:@"status"] isEqualToString:@"OK"]){
-                                           NSLog(@"status OK");
                                            if([JSON objectForKey:@"results"]
                                               && [[JSON objectForKey:@"results"] count] > 0){
                                                // Save address
@@ -302,7 +303,6 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
                                    if(!errorJson){
                                        // Does the address exist ?
                                        if([[JSON objectForKey:@"status"] isEqualToString:@"OK"]){
-                                           NSLog(@"status OK");
                                            if([[JSON objectForKey:@"results"] objectAtIndex:0]
                                               && [[[JSON objectForKey:@"results"] objectAtIndex:0] objectForKey:@"geometry"]
                                               && [[[[JSON objectForKey:@"results"] objectAtIndex:0] objectForKey:@"geometry"] objectForKey:@"location"]){
@@ -332,7 +332,6 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 -(void)generateGpxWithFilename:(NSString*)filename address:(NSString*)ad city:(NSString*)ci postalCode:(NSString*)zip country:(NSString*)co lat:(NSNumber*)lat lng:(NSNumber*)lng{
     // Be sure there is no space in the filename
     filename = [filename stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    
     XCProject* project = [[XCProject alloc] initWithFilePath:self.currentXcodeProject];
     XCGroup* group     = [project groupWithPathFromRoot:@"GPX"];
     // GPX Group doesn't exist ?!
