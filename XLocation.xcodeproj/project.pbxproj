@@ -20,9 +20,12 @@
 		F87CAFD41923FBF7007BDCB5 /* IDEFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F87CAFD21923FBF7007BDCB5 /* IDEFoundation.framework */; };
 		F87CAFD51923FBF7007BDCB5 /* IDEKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F87CAFD31923FBF7007BDCB5 /* IDEKit.framework */; };
 		F89831CB1926DD6C00839785 /* LWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F89831CA1926DD6C00839785 /* LWindow.m */; };
+		F8A3EDDC1947B0EC00123269 /* LWorkspaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A3EDDB1947B0EC00123269 /* LWorkspaceView.m */; };
 		F8AC30F11926BF6400E07ECB /* LWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AC30F01926BF6400E07ECB /* LWindow.xib */; };
 		F8B1215C1926607D00BC4756 /* NSString+Gpx.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B1215B1926607D00BC4756 /* NSString+Gpx.m */; };
 		F8BAE4411927D5A400A0FAA7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8BAE4401927D5A400A0FAA7 /* MapKit.framework */; };
+		F8BB5AC61947A1B200EFB5D5 /* LWorkspace.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BB5AC51947A1B200EFB5D5 /* LWorkspace.m */; };
+		F8F4673D19488621003B753B /* RMBlurredView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F4673C19488621003B753B /* RMBlurredView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,10 +58,16 @@
 		F87CAFD31923FBF7007BDCB5 /* IDEKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDEKit.framework; path = ../../../../../Applications/Xcode.app/Contents/Frameworks/IDEKit.framework; sourceTree = "<group>"; };
 		F89831C91926DD6C00839785 /* LWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWindow.h; sourceTree = "<group>"; };
 		F89831CA1926DD6C00839785 /* LWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWindow.m; sourceTree = "<group>"; };
+		F8A3EDDA1947B0EC00123269 /* LWorkspaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWorkspaceView.h; sourceTree = "<group>"; };
+		F8A3EDDB1947B0EC00123269 /* LWorkspaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWorkspaceView.m; sourceTree = "<group>"; };
 		F8AC30F01926BF6400E07ECB /* LWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LWindow.xib; sourceTree = "<group>"; };
 		F8B1215A1926607D00BC4756 /* NSString+Gpx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Gpx.h"; path = "Categories/NSString+Gpx.h"; sourceTree = "<group>"; };
 		F8B1215B1926607D00BC4756 /* NSString+Gpx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Gpx.m"; path = "Categories/NSString+Gpx.m"; sourceTree = "<group>"; };
 		F8BAE4401927D5A400A0FAA7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F8BB5AC41947A1B200EFB5D5 /* LWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWorkspace.h; path = Classes/LWorkspace.h; sourceTree = "<group>"; };
+		F8BB5AC51947A1B200EFB5D5 /* LWorkspace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWorkspace.m; path = Classes/LWorkspace.m; sourceTree = "<group>"; };
+		F8F4673B19488621003B753B /* RMBlurredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMBlurredView.h; path = Views/RMBlurredView.h; sourceTree = "<group>"; };
+		F8F4673C19488621003B753B /* RMBlurredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMBlurredView.m; path = Views/RMBlurredView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +127,9 @@
 		F80094CA19238C230005112D /* XLocation */ = {
 			isa = PBXGroup;
 			children = (
+				F8F4673A19488605003B753B /* Views */,
 				F82433F71928089400B20336 /* Classes */,
 				F8B121591926603100BC4756 /* Categories */,
-				F80326DC1927EC7500BE9148 /* LMapView.h */,
-				F80326DD1927EC7500BE9148 /* LMapView.m */,
 				F89831C91926DD6C00839785 /* LWindow.h */,
 				F89831CA1926DD6C00839785 /* LWindow.m */,
 				F8AC30F01926BF6400E07ECB /* LWindow.xib */,
@@ -148,6 +156,8 @@
 			children = (
 				F82433F81928092D00B20336 /* LAnnotation.h */,
 				F82433F91928092D00B20336 /* LAnnotation.m */,
+				F8BB5AC41947A1B200EFB5D5 /* LWorkspace.h */,
+				F8BB5AC51947A1B200EFB5D5 /* LWorkspace.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -174,6 +184,19 @@
 				F8B1215B1926607D00BC4756 /* NSString+Gpx.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		F8F4673A19488605003B753B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8A3EDDA1947B0EC00123269 /* LWorkspaceView.h */,
+				F8A3EDDB1947B0EC00123269 /* LWorkspaceView.m */,
+				F80326DC1927EC7500BE9148 /* LMapView.h */,
+				F80326DD1927EC7500BE9148 /* LMapView.m */,
+				F8F4673B19488621003B753B /* RMBlurredView.h */,
+				F8F4673C19488621003B753B /* RMBlurredView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,11 +298,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8BB5AC61947A1B200EFB5D5 /* LWorkspace.m in Sources */,
 				F82433FA1928092D00B20336 /* LAnnotation.m in Sources */,
 				F89831CB1926DD6C00839785 /* LWindow.m in Sources */,
 				F8B1215C1926607D00BC4756 /* NSString+Gpx.m in Sources */,
+				F8F4673D19488621003B753B /* RMBlurredView.m in Sources */,
 				F80326DE1927EC7500BE9148 /* LMapView.m in Sources */,
 				F80094D219238C230005112D /* LXLocation.m in Sources */,
+				F8A3EDDC1947B0EC00123269 /* LWorkspaceView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
