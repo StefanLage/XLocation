@@ -20,6 +20,7 @@
     self = [super initWithCoder:aDecoder];
     if(self){
         _bkRegion = self.region;
+        _isEnable = YES;
     }
     return self;
 }
@@ -40,6 +41,13 @@
 
 -(void)resetRegion{
     self.region = self.bkRegion;
+}
+
+-(NSView*)hitTest:(NSPoint)aPoint{
+    if(self.isEnable)
+        return [super hitTest:aPoint];
+    else
+        return nil;
 }
 
 @end

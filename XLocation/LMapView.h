@@ -10,6 +10,7 @@
 
 @interface LMapView : MKMapView
 
+@property (nonatomic) BOOL isEnable;
 -(void)resetRegion;
 
 @end
