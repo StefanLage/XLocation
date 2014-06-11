@@ -18,6 +18,7 @@
                 <outlet property="generateMap" destination="Owf-cN-HsX" id="Ue6-TG-LGa"/>
                 <outlet property="mapView" destination="BW8-61-FRb" id="upC-Un-AZK"/>
                 <outlet property="postalCodeField" destination="i37-HG-r0t" id="tm5-yp-z0P"/>
+                <outlet property="tabView" destination="ieG-s8-zkt" id="W87-5I-ult"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -36,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="From Map" identifier="" id="6K8-LY-DC9">
+                            <tabViewItem label="From Map" identifier="MapTab" id="6K8-LY-DC9">
                                 <view key="view" ambiguous="YES" id="zHb-HL-lCD">
                                     <rect key="frame" x="10" y="33" width="209" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,7 +86,7 @@ DQ
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Address:" id="gMP-lD-pkk">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                     </subviews>

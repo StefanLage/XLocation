@@ -59,6 +59,7 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 @property (weak) IBOutlet NSButton    * generateMap;
 @property (weak) IBOutlet LMapView    * mapView;
 @property (weak) IBOutlet NSTextField * addressLbl;
+@property (weak) IBOutlet NSTabView *tabView;
 
 @end
 
