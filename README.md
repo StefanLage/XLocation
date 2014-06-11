@@ -2,7 +2,7 @@
 
 **XLocation** is an open source **XCode** plugin.
 <br />
-It lets you add a new location from an address known to your current xcode project.
+It lets you add a new location from an address known to your current xcode project. **NEW**, now it works in a **Workspace** too.
 <br />
 
 ![Main](Screens/main.png)
@@ -39,6 +39,13 @@ You can create a new GPX file informing the following fields:
 - The filename
 
 ![Demo](Screens/demo_address.gif)
+
+##Workspace
+
+If you are using a workspace with severals projects, you will have to select in which project you would like to add the GPX file.
+
+
+![Demo](Screens/demo_workspace.gif)
 
 ##Installation
 
