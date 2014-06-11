@@ -48,13 +48,14 @@ static NSString * const continueTitle  = @"Continue";
     
     float x = midPoint.x - 115;
     float y = midPoint.y - 125.0;
-    
     _back  = [[NSButton alloc] initWithFrame:NSMakeRect(x, y, 115, 32)];
     [_back setTitle:goBackTitle];
     [_back setTarget:self];
     [_back setAction:@selector(back:)];
     [_back setButtonType:NSMomentaryLightButton];
     [_back setBezelStyle:NSRoundedBezelStyle];
+    // Set escpace key as shortcut
+    [_back setKeyEquivalent:@"\033"];
     
     _continueBtn  = [[NSButton alloc] initWithFrame:NSMakeRect(x+125, y, 115, 32)];
     [_continueBtn setTitle:continueTitle];
@@ -62,6 +63,7 @@ static NSString * const continueTitle  = @"Continue";
     [_continueBtn setAction:@selector(projectSelected:)];
     [_continueBtn setButtonType:NSMomentaryLightButton];
     [_continueBtn setBezelStyle:NSRoundedBezelStyle];
+    // Set enter/return key as shortcut
     [_continueBtn setKeyEquivalent:@"\r"];
     
     [self addSubview:_back];
