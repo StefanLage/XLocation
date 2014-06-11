@@ -8,8 +8,9 @@
 
 #import <AppKit/AppKit.h>
 #import <MapKit/MapKit.h>
+#import "LWorkspaceView.h"
 
-@interface LXLocation : NSObject
+@interface LXLocation : NSObject <LWorskpaceViewDelegate>
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)generateFromMap:(id)sender;

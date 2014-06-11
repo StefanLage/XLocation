@@ -24,6 +24,8 @@
 #import "LAnnotation.h"
 // MapView
 #import "LMapView.h"
+// LWorkspace
+#import "LWorkspace.h"
 
 // Singleton
 static LXLocation *sharedPlugin;
@@ -36,7 +38,7 @@ static NSString * const addressNotFound  = @"Address not found!";
 static NSString * const projectNotFound  = @"Xcode project not found at path: %@";
 static NSString * const noPointSelected  = @"Please select a location first!";
 static NSString * const generateDone     = @"File %@.gpx created! This one has been added to your current project in the Group named GPX.";
-
+static NSString * const workspaceExt     = @"xcworkspace";
 
 @interface LXLocation()
 
@@ -46,6 +48,9 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
 @property (nonatomic, strong) NSMenuItem  * actionItem;
 @property (nonatomic, strong) LWindow     * locationsWindow;
 @property (nonatomic, strong) LAnnotation * pAnnotation;
+@property (nonatomic, strong) LWorkspace  * worskspace;
+@property (nonatomic) BOOL selectProject;
+@property (nonatomic) BOOL generateFromMap;
 
 // IBOutlets
 @property (weak) IBOutlet NSTextField * filenameField;
@@ -145,6 +150,11 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
         self.currentXcodeProject                      = [representingFilePath.pathString stringByReplacingOccurrencesOfString:@".xcworkspace"
                                                                                                                    withString:@".xcodeproj"];
         self.currentWorkspaceFilePath                 = pathString;
+        // Check type of project (Workspace or Xcodeproject)
+        if([[representingFilePath.pathString pathExtension] isEqualToString:workspaceExt]){
+            self.worskspace = [[LWorkspace alloc] initWithUrl:representingFilePath.pathString
+                                                  currentPath:pathString];
+        }
         // Enable action button
         [self.actionItem setTarget:self];
     }
@@ -387,6 +397,14 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
     [self.addressLbl setStringValue:@"?"];
 }
 
+-(BOOL)isRightPath{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:self.currentXcodeProject])
+        return YES;
+    else
+        return NO;
+}
+
 #pragma mark - Modal delegate
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo{
@@ -423,12 +441,14 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
  * Enable / Disable the buttons
  */
 -(void)enableDisableActions:(BOOL)value{
-    // Disable TabItem 1
+    // Enable/Disable TabItem 1
     [[self cancelMap] setEnabled:value];
     [[self generateMap] setEnabled:value];
-    // Disable TabItem 2
+    // Enable/Disable TabItem 2
     [[self cancelBtn] setEnabled:value];
     [[self generateBtn] setEnabled:value];
+    // Enable/Disable the map
+    [self.mapView setIsEnable:value];
 }
 
 /*
@@ -484,14 +504,23 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
     __block NSString *country  = [self.countryField stringValue];
     // Continue ?
     if([self isRequiredInformed:city country:country]){
-        // Disable button
-        [self enableDisableActions:NO];
-        // Generate the file
-        [self generateGpx:filename
-                  address:address
-                     city:city
-               postalCode:pCode
-                  country:country];
+        if(self.worskspace && !self.selectProject){
+            if(self.generateFromMap)
+                self.generateFromMap = NO;
+            [self getWorkspace];
+        }
+        else{
+            if(self.selectProject)
+                self.selectProject = NO;
+            // Disable button
+            [self enableDisableActions:NO];
+            // Generate the file
+            [self generateGpx:filename
+                      address:address
+                         city:city
+                   postalCode:pCode
+                      country:country];
+        }
     }
 }
 
@@ -503,28 +532,85 @@ static NSString * const generateDone     = @"File %@.gpx created! This one has b
         return;
     }
     else{
-        NSString *address  = self.pAnnotation.address;
-        NSString *city     = self.pAnnotation.city;
-        NSString *filename = [[NSString alloc] initWithData:[city dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]
-                                                   encoding:NSASCIIStringEncoding];
-        NSString *pCode    = self.pAnnotation.zipCode;
-        NSString *country  = self.pAnnotation.country;
-        NSNumber *lat      = @(self.pAnnotation.annotation.coordinate.latitude);
-        NSNumber *lng      = @(self.pAnnotation.annotation.coordinate.longitude);
-        // Continue ?
-        if([self isRequiredInformed:city country:country]){
-            // Disable button
-            [self enableDisableActions:NO];
-            // Generate the file
-            [self generateGpxWithFilename:filename
-                                  address:address
-                                     city:city
-                               postalCode:pCode
-                                  country:country
-                                      lat:lat
-                                      lng:lng];
+        if(self.worskspace && !self.selectProject){
+            if(!self.generateFromMap)
+                self.generateFromMap = YES;
+            [self getWorkspace];
+        }
+        else{
+            if(self.selectProject)
+                self.selectProject = NO;
+            NSString *address  = self.pAnnotation.address;
+            NSString *city     = self.pAnnotation.city;
+            NSString *filename = [[NSString alloc] initWithData:[city dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES]
+                                                       encoding:NSASCIIStringEncoding];
+            NSString *pCode    = self.pAnnotation.zipCode;
+            NSString *country  = self.pAnnotation.country;
+            NSNumber *lat      = @(self.pAnnotation.annotation.coordinate.latitude);
+            NSNumber *lng      = @(self.pAnnotation.annotation.coordinate.longitude);
+            // Continue ?
+            if([self isRequiredInformed:city country:country]){
+                // Disable button
+                [self enableDisableActions:NO];
+                // Generate the file
+                [self generateGpxWithFilename:filename
+                                      address:address
+                                         city:city
+                                   postalCode:pCode
+                                      country:country
+                                          lat:lat
+                                          lng:lng];
+            }
         }
     }
+}
+
+#pragma mark - Workspace
+
+-(void) getWorkspace{
+    // Ask to user in which projects he'd like to add gpx file
+    LWorkspaceView *workspaceView = [[LWorkspaceView alloc] initWithFrame:[self.tabView frame]
+                                                                workspace:self.worskspace];
+    [workspaceView setBlurRadius:4.0];
+    [workspaceView setSaturationFactor:2.0];
+    workspaceView.delegate = self;
+    [self.tabView addSubview:workspaceView positioned:NSWindowAbove
+                  relativeTo:nil];
+    // Set default button
+    [self.locationsWindow setDefaultButtonCell:[workspaceView.continueBtn cell]];
+    //Disable all controls
+    [self enableDisableActions:NO];
+}
+
+#pragma mark - LWorkspace delegate methods
+
+-(void)goBack:(LWorkspaceView *)view{
+    // Set default button to init value
+    if(self.generateFromMap)
+        [self.locationsWindow setDefaultButtonCell:[self.generateMap cell]];
+    else
+        [self.locationsWindow setDefaultButtonCell:[self.generateBtn cell]];
+    [view removeFromSuperview];
+    // Enable all controls
+    [self enableDisableActions:YES];
+}
+
+-(void)projectSelected:(LWorkspaceView *)view index:(NSInteger)index{
+    // Get project infos
+    NSDictionary *project         = [self.worskspace.projects objectAtIndex:index];
+    NSString *pathString          = [[project objectForKey:@"location"] stringByReplacingOccurrencesOfString:[project objectForKey:@"filename"]
+                                                                                                  withString:@""];
+    // Save project infos
+    self.currentXcodeProject      = [project objectForKey:@"location"];
+    self.currentWorkspaceFilePath = pathString;
+    self.selectProject            = YES;
+    // Then generate the file
+    if(self.generateFromMap)
+        [self generateFromMap:nil];
+    else
+        [self generateFromAddress:nil];
+    // Quit this view
+    [self goBack:view];
 }
 
 @end
