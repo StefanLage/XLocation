@@ -7,12 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BCDF75E9D4734F35BC9F3A00 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF41F88D3BC442CFBCF75919 /* libPods.a */; };
 		F80094C719238C230005112D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80094C619238C230005112D /* AppKit.framework */; };
 		F80094C919238C230005112D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80094C819238C230005112D /* Foundation.framework */; };
 		F80094CF19238C230005112D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F80094CD19238C230005112D /* InfoPlist.strings */; };
 		F80094D219238C230005112D /* LXLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F80094D119238C230005112D /* LXLocation.m */; };
 		F80326DE1927EC7500BE9148 /* LMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = F80326DD1927EC7500BE9148 /* LMapView.m */; };
+		F80D06C91949BC5500356662 /* XCKeyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06A81949BC5500356662 /* XCKeyBuilder.m */; };
+		F80D06CA1949BC5500356662 /* XCAbstractDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06AA1949BC5500356662 /* XCAbstractDefinition.m */; };
+		F80D06CB1949BC5500356662 /* XCBuildConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06AC1949BC5500356662 /* XCBuildConfiguration.m */; };
+		F80D06CC1949BC5500356662 /* XCClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06AE1949BC5500356662 /* XCClassDefinition.m */; };
+		F80D06CD1949BC5500356662 /* XCFileOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06B01949BC5500356662 /* XCFileOperationQueue.m */; };
+		F80D06CE1949BC5500356662 /* XCFrameworkDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06B21949BC5500356662 /* XCFrameworkDefinition.m */; };
+		F80D06CF1949BC5500356662 /* XCGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06B41949BC5500356662 /* XCGroup.m */; };
+		F80D06D01949BC5500356662 /* XcodeMemberType.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06B81949BC5500356662 /* XcodeMemberType.m */; };
+		F80D06D11949BC5500356662 /* XcodeSourceFileType.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06BA1949BC5500356662 /* XcodeSourceFileType.m */; };
+		F80D06D21949BC5500356662 /* XCProject.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06BC1949BC5500356662 /* XCProject.m */; };
+		F80D06D31949BC5500356662 /* XCProject+SubProject.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06BE1949BC5500356662 /* XCProject+SubProject.m */; };
+		F80D06D41949BC5500356662 /* XCSourceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06C01949BC5500356662 /* XCSourceFile.m */; };
+		F80D06D51949BC5500356662 /* XCSourceFileDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06C21949BC5500356662 /* XCSourceFileDefinition.m */; };
+		F80D06D61949BC5500356662 /* XCSubProjectDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06C41949BC5500356662 /* XCSubProjectDefinition.m */; };
+		F80D06D71949BC5500356662 /* XCTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06C61949BC5500356662 /* XCTarget.m */; };
+		F80D06D81949BC5500356662 /* XCXibDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D06C81949BC5500356662 /* XCXibDefinition.m */; };
 		F82433FA1928092D00B20336 /* LAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F82433F91928092D00B20336 /* LAnnotation.m */; };
 		F865D14E1923C03600010DE7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F865D14D1923C03600010DE7 /* Cocoa.framework */; };
 		F87CAFCF1923FBCE007BDCB5 /* DVTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F87CAFCE1923FBCE007BDCB5 /* DVTKit.framework */; };
@@ -29,8 +44,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2245B325EC2D4569A481033B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		EF41F88D3BC442CFBCF75919 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80094C319238C230005112D /* XLocation.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XLocation.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80094C619238C230005112D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		F80094C819238C230005112D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -41,6 +54,41 @@
 		F80094D319238C230005112D /* XLocation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XLocation-Prefix.pch"; sourceTree = "<group>"; };
 		F80326DC1927EC7500BE9148 /* LMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMapView.h; sourceTree = "<group>"; };
 		F80326DD1927EC7500BE9148 /* LMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMapView.m; sourceTree = "<group>"; };
+		F80D06A71949BC5500356662 /* XCKeyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCKeyBuilder.h; sourceTree = "<group>"; };
+		F80D06A81949BC5500356662 /* XCKeyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCKeyBuilder.m; sourceTree = "<group>"; };
+		F80D06A91949BC5500356662 /* XCAbstractDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCAbstractDefinition.h; path = Dependencies/XcodeEditor/XCAbstractDefinition.h; sourceTree = "<group>"; };
+		F80D06AA1949BC5500356662 /* XCAbstractDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCAbstractDefinition.m; path = Dependencies/XcodeEditor/XCAbstractDefinition.m; sourceTree = "<group>"; };
+		F80D06AB1949BC5500356662 /* XCBuildConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCBuildConfiguration.h; path = Dependencies/XcodeEditor/XCBuildConfiguration.h; sourceTree = "<group>"; };
+		F80D06AC1949BC5500356662 /* XCBuildConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCBuildConfiguration.m; path = Dependencies/XcodeEditor/XCBuildConfiguration.m; sourceTree = "<group>"; };
+		F80D06AD1949BC5500356662 /* XCClassDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCClassDefinition.h; path = Dependencies/XcodeEditor/XCClassDefinition.h; sourceTree = "<group>"; };
+		F80D06AE1949BC5500356662 /* XCClassDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCClassDefinition.m; path = Dependencies/XcodeEditor/XCClassDefinition.m; sourceTree = "<group>"; };
+		F80D06AF1949BC5500356662 /* XCFileOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCFileOperationQueue.h; path = Dependencies/XcodeEditor/XCFileOperationQueue.h; sourceTree = "<group>"; };
+		F80D06B01949BC5500356662 /* XCFileOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCFileOperationQueue.m; path = Dependencies/XcodeEditor/XCFileOperationQueue.m; sourceTree = "<group>"; };
+		F80D06B11949BC5500356662 /* XCFrameworkDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCFrameworkDefinition.h; path = Dependencies/XcodeEditor/XCFrameworkDefinition.h; sourceTree = "<group>"; };
+		F80D06B21949BC5500356662 /* XCFrameworkDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCFrameworkDefinition.m; path = Dependencies/XcodeEditor/XCFrameworkDefinition.m; sourceTree = "<group>"; };
+		F80D06B31949BC5500356662 /* XCGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCGroup.h; path = Dependencies/XcodeEditor/XCGroup.h; sourceTree = "<group>"; };
+		F80D06B41949BC5500356662 /* XCGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCGroup.m; path = Dependencies/XcodeEditor/XCGroup.m; sourceTree = "<group>"; };
+		F80D06B51949BC5500356662 /* XcodeEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XcodeEditor.h; path = Dependencies/XcodeEditor/XcodeEditor.h; sourceTree = "<group>"; };
+		F80D06B61949BC5500356662 /* XcodeGroupMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XcodeGroupMember.h; path = Dependencies/XcodeEditor/XcodeGroupMember.h; sourceTree = "<group>"; };
+		F80D06B71949BC5500356662 /* XcodeMemberType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XcodeMemberType.h; path = Dependencies/XcodeEditor/XcodeMemberType.h; sourceTree = "<group>"; };
+		F80D06B81949BC5500356662 /* XcodeMemberType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XcodeMemberType.m; path = Dependencies/XcodeEditor/XcodeMemberType.m; sourceTree = "<group>"; };
+		F80D06B91949BC5500356662 /* XcodeSourceFileType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XcodeSourceFileType.h; path = Dependencies/XcodeEditor/XcodeSourceFileType.h; sourceTree = "<group>"; };
+		F80D06BA1949BC5500356662 /* XcodeSourceFileType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XcodeSourceFileType.m; path = Dependencies/XcodeEditor/XcodeSourceFileType.m; sourceTree = "<group>"; };
+		F80D06BB1949BC5500356662 /* XCProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCProject.h; path = Dependencies/XcodeEditor/XCProject.h; sourceTree = "<group>"; };
+		F80D06BC1949BC5500356662 /* XCProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCProject.m; path = Dependencies/XcodeEditor/XCProject.m; sourceTree = "<group>"; };
+		F80D06BD1949BC5500356662 /* XCProject+SubProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "XCProject+SubProject.h"; path = "Dependencies/XcodeEditor/XCProject+SubProject.h"; sourceTree = "<group>"; };
+		F80D06BE1949BC5500356662 /* XCProject+SubProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "XCProject+SubProject.m"; path = "Dependencies/XcodeEditor/XCProject+SubProject.m"; sourceTree = "<group>"; };
+		F80D06BF1949BC5500356662 /* XCSourceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCSourceFile.h; path = Dependencies/XcodeEditor/XCSourceFile.h; sourceTree = "<group>"; };
+		F80D06C01949BC5500356662 /* XCSourceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCSourceFile.m; path = Dependencies/XcodeEditor/XCSourceFile.m; sourceTree = "<group>"; };
+		F80D06C11949BC5500356662 /* XCSourceFileDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCSourceFileDefinition.h; path = Dependencies/XcodeEditor/XCSourceFileDefinition.h; sourceTree = "<group>"; };
+		F80D06C21949BC5500356662 /* XCSourceFileDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCSourceFileDefinition.m; path = Dependencies/XcodeEditor/XCSourceFileDefinition.m; sourceTree = "<group>"; };
+		F80D06C31949BC5500356662 /* XCSubProjectDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCSubProjectDefinition.h; path = Dependencies/XcodeEditor/XCSubProjectDefinition.h; sourceTree = "<group>"; };
+		F80D06C41949BC5500356662 /* XCSubProjectDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCSubProjectDefinition.m; path = Dependencies/XcodeEditor/XCSubProjectDefinition.m; sourceTree = "<group>"; };
+		F80D06C51949BC5500356662 /* XCTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCTarget.h; path = Dependencies/XcodeEditor/XCTarget.h; sourceTree = "<group>"; };
+		F80D06C61949BC5500356662 /* XCTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCTarget.m; path = Dependencies/XcodeEditor/XCTarget.m; sourceTree = "<group>"; };
+		F80D06C71949BC5500356662 /* XCXibDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCXibDefinition.h; path = Dependencies/XcodeEditor/XCXibDefinition.h; sourceTree = "<group>"; };
+		F80D06C81949BC5500356662 /* XCXibDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCXibDefinition.m; path = Dependencies/XcodeEditor/XCXibDefinition.m; sourceTree = "<group>"; };
+		F80D06DA1949BC8700356662 /* OCLogTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCLogTemplate.h; sourceTree = "<group>"; };
 		F82433F81928092D00B20336 /* LAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LAnnotation.h; path = Classes/LAnnotation.h; sourceTree = "<group>"; };
 		F82433F91928092D00B20336 /* LAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LAnnotation.m; path = Classes/LAnnotation.m; sourceTree = "<group>"; };
 		F865D14D1923C03600010DE7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -66,6 +114,8 @@
 		F8BAE4401927D5A400A0FAA7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F8BB5AC41947A1B200EFB5D5 /* LWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LWorkspace.h; path = Classes/LWorkspace.h; sourceTree = "<group>"; };
 		F8BB5AC51947A1B200EFB5D5 /* LWorkspace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LWorkspace.m; path = Classes/LWorkspace.m; sourceTree = "<group>"; };
+		F8E46B541949B51000C43E8F /* XcodeEditor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeEditor.framework; path = Dependencies/XcodeEditor/build/Debug/XcodeEditor.framework; sourceTree = "<group>"; };
+		F8E46B561949B5C200C43E8F /* XcodeEditor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeEditor.framework; path = "../../../../Library/Developer/Xcode/DerivedData/XLocation-bvfsktypljbpaqcugmxxgbcspdud/Build/Products/Debug/XcodeEditor.framework"; sourceTree = "<group>"; };
 		F8F4673B19488621003B753B /* RMBlurredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMBlurredView.h; path = Views/RMBlurredView.h; sourceTree = "<group>"; };
 		F8F4673C19488621003B753B /* RMBlurredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMBlurredView.m; path = Views/RMBlurredView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,7 +133,6 @@
 				F87CAFD51923FBF7007BDCB5 /* IDEKit.framework in Frameworks */,
 				F80094C719238C230005112D /* AppKit.framework in Frameworks */,
 				F80094C919238C230005112D /* Foundation.framework in Frameworks */,
-				BCDF75E9D4734F35BC9F3A00 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,10 +142,10 @@
 		F80094BA19238C230005112D = {
 			isa = PBXGroup;
 			children = (
+				F80D06751949BB7200356662 /* Dependencies */,
 				F80094CA19238C230005112D /* XLocation */,
 				F80094C519238C230005112D /* Frameworks */,
 				F80094C419238C230005112D /* Products */,
-				2245B325EC2D4569A481033B /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +160,8 @@
 		F80094C519238C230005112D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8E46B561949B5C200C43E8F /* XcodeEditor.framework */,
+				F8E46B541949B51000C43E8F /* XcodeEditor.framework */,
 				F8BAE4401927D5A400A0FAA7 /* MapKit.framework */,
 				F87CAFD21923FBF7007BDCB5 /* IDEFoundation.framework */,
 				F87CAFD31923FBF7007BDCB5 /* IDEKit.framework */,
@@ -119,7 +170,6 @@
 				F865D14D1923C03600010DE7 /* Cocoa.framework */,
 				F80094C619238C230005112D /* AppKit.framework */,
 				F80094C819238C230005112D /* Foundation.framework */,
-				EF41F88D3BC442CFBCF75919 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -149,6 +199,74 @@
 				F80094D319238C230005112D /* XLocation-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F80D06751949BB7200356662 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				F80D06D91949BC8700356662 /* OCLogTemplate */,
+				F80D06761949BB9400356662 /* XcodeEditor */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		F80D06761949BB9400356662 /* XcodeEditor */ = {
+			isa = PBXGroup;
+			children = (
+				F80D06A61949BC5500356662 /* Utils */,
+				F80D06A91949BC5500356662 /* XCAbstractDefinition.h */,
+				F80D06AA1949BC5500356662 /* XCAbstractDefinition.m */,
+				F80D06AB1949BC5500356662 /* XCBuildConfiguration.h */,
+				F80D06AC1949BC5500356662 /* XCBuildConfiguration.m */,
+				F80D06AD1949BC5500356662 /* XCClassDefinition.h */,
+				F80D06AE1949BC5500356662 /* XCClassDefinition.m */,
+				F80D06AF1949BC5500356662 /* XCFileOperationQueue.h */,
+				F80D06B01949BC5500356662 /* XCFileOperationQueue.m */,
+				F80D06B11949BC5500356662 /* XCFrameworkDefinition.h */,
+				F80D06B21949BC5500356662 /* XCFrameworkDefinition.m */,
+				F80D06B31949BC5500356662 /* XCGroup.h */,
+				F80D06B41949BC5500356662 /* XCGroup.m */,
+				F80D06B51949BC5500356662 /* XcodeEditor.h */,
+				F80D06B61949BC5500356662 /* XcodeGroupMember.h */,
+				F80D06B71949BC5500356662 /* XcodeMemberType.h */,
+				F80D06B81949BC5500356662 /* XcodeMemberType.m */,
+				F80D06B91949BC5500356662 /* XcodeSourceFileType.h */,
+				F80D06BA1949BC5500356662 /* XcodeSourceFileType.m */,
+				F80D06BB1949BC5500356662 /* XCProject.h */,
+				F80D06BC1949BC5500356662 /* XCProject.m */,
+				F80D06BD1949BC5500356662 /* XCProject+SubProject.h */,
+				F80D06BE1949BC5500356662 /* XCProject+SubProject.m */,
+				F80D06BF1949BC5500356662 /* XCSourceFile.h */,
+				F80D06C01949BC5500356662 /* XCSourceFile.m */,
+				F80D06C11949BC5500356662 /* XCSourceFileDefinition.h */,
+				F80D06C21949BC5500356662 /* XCSourceFileDefinition.m */,
+				F80D06C31949BC5500356662 /* XCSubProjectDefinition.h */,
+				F80D06C41949BC5500356662 /* XCSubProjectDefinition.m */,
+				F80D06C51949BC5500356662 /* XCTarget.h */,
+				F80D06C61949BC5500356662 /* XCTarget.m */,
+				F80D06C71949BC5500356662 /* XCXibDefinition.h */,
+				F80D06C81949BC5500356662 /* XCXibDefinition.m */,
+			);
+			name = XcodeEditor;
+			sourceTree = "<group>";
+		};
+		F80D06A61949BC5500356662 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F80D06A71949BC5500356662 /* XCKeyBuilder.h */,
+				F80D06A81949BC5500356662 /* XCKeyBuilder.m */,
+			);
+			name = Utils;
+			path = Dependencies/XcodeEditor/Utils;
+			sourceTree = "<group>";
+		};
+		F80D06D91949BC8700356662 /* OCLogTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				F80D06DA1949BC8700356662 /* OCLogTemplate.h */,
+			);
+			name = OCLogTemplate;
+			path = Dependencies/OCLogTemplate;
 			sourceTree = "<group>";
 		};
 		F82433F71928089400B20336 /* Classes */ = {
@@ -206,11 +324,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F80094D619238C230005112D /* Build configuration list for PBXNativeTarget "XLocation" */;
 			buildPhases = (
-				52D889E057B44C3BB5C064A9 /* Check Pods Manifest.lock */,
 				F80094BF19238C230005112D /* Sources */,
 				F80094C019238C230005112D /* Frameworks */,
 				F80094C119238C230005112D /* Resources */,
-				F0E28B32DEB140D18EF932B2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,52 +376,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		52D889E057B44C3BB5C064A9 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F0E28B32DEB140D18EF932B2 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		F80094BF19238C230005112D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F80D06C91949BC5500356662 /* XCKeyBuilder.m in Sources */,
 				F8BB5AC61947A1B200EFB5D5 /* LWorkspace.m in Sources */,
+				F80D06D51949BC5500356662 /* XCSourceFileDefinition.m in Sources */,
 				F82433FA1928092D00B20336 /* LAnnotation.m in Sources */,
+				F80D06CA1949BC5500356662 /* XCAbstractDefinition.m in Sources */,
+				F80D06D11949BC5500356662 /* XcodeSourceFileType.m in Sources */,
 				F89831CB1926DD6C00839785 /* LWindow.m in Sources */,
 				F8B1215C1926607D00BC4756 /* NSString+Gpx.m in Sources */,
 				F8F4673D19488621003B753B /* RMBlurredView.m in Sources */,
+				F80D06D21949BC5500356662 /* XCProject.m in Sources */,
+				F80D06D71949BC5500356662 /* XCTarget.m in Sources */,
 				F80326DE1927EC7500BE9148 /* LMapView.m in Sources */,
+				F80D06CF1949BC5500356662 /* XCGroup.m in Sources */,
+				F80D06D01949BC5500356662 /* XcodeMemberType.m in Sources */,
+				F80D06CE1949BC5500356662 /* XCFrameworkDefinition.m in Sources */,
+				F80D06D41949BC5500356662 /* XCSourceFile.m in Sources */,
+				F80D06CC1949BC5500356662 /* XCClassDefinition.m in Sources */,
+				F80D06D31949BC5500356662 /* XCProject+SubProject.m in Sources */,
 				F80094D219238C230005112D /* LXLocation.m in Sources */,
+				F80D06D81949BC5500356662 /* XCXibDefinition.m in Sources */,
+				F80D06CB1949BC5500356662 /* XCBuildConfiguration.m in Sources */,
 				F8A3EDDC1947B0EC00123269 /* LWorkspaceView.m in Sources */,
+				F80D06D61949BC5500356662 /* XCSubProjectDefinition.m in Sources */,
+				F80D06CD1949BC5500356662 /* XCFileOperationQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +494,6 @@
 		};
 		F80094D719238C230005112D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2245B325EC2D4569A481033B /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
@@ -404,9 +502,15 @@
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Frameworks",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/XLocation-bvfsktypljbpaqcugmxxgbcspdud/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XLocation/XLocation-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					./Dependencies/XcodeEditor/Source/Main,
+				);
 				INFOPLIST_FILE = "XLocation/XLocation-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -416,7 +520,6 @@
 		};
 		F80094D819238C230005112D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2245B325EC2D4569A481033B /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
@@ -425,9 +528,15 @@
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Frameworks",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/XLocation-bvfsktypljbpaqcugmxxgbcspdud/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XLocation/XLocation-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					./Dependencies/XcodeEditor/Source/Main,
+				);
 				INFOPLIST_FILE = "XLocation/XLocation-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				PRODUCT_NAME = "$(TARGET_NAME)";
