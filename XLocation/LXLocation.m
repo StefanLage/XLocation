@@ -510,6 +510,8 @@ static NSString * const workspaceExt     = @"xcworkspace";
             [self getWorkspace];
         }
         else{
+            if(self.worskspace)
+                self.worskspace = nil;
             if(self.selectProject)
                 self.selectProject = NO;
             // Disable button
@@ -538,6 +540,8 @@ static NSString * const workspaceExt     = @"xcworkspace";
             [self getWorkspace];
         }
         else{
+            if(self.worskspace)
+                self.worskspace = nil;
             if(self.selectProject)
                 self.selectProject = NO;
             NSString *address  = self.pAnnotation.address;
