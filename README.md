@@ -47,7 +47,13 @@ If you are using a workspace with severals projects, you will have to select in 
 
 ![Demo](Screens/demo_workspace.gif)
 
-##Installation
+##Install
+
+###Via Alcatraz
+
+XLocation plugin is available through the [Alcatraz](http://alcatraz.io/).
+
+###From Source
 
 Download the project and build it, then relaunch Xcode.
 <br />
@@ -56,6 +62,10 @@ A new item named `Add new Location` should appear in the menu item `Debug`.
 XLocation will be installed in `~/Library/Application Support/Developer/Shared/Xcode/Plug-ins` automatically.
 
 If you want to uninstall XLocation, remove XLocation in Plug-ins directory.
+
+##Dependency
+
+[`XcodeEditor`](https://github.com/jasperblues/XcodeEditor) to manipulate Xcode project files.
 
 
 ##License
