@@ -78,7 +78,42 @@ static NSString * const workspaceExt     = @"xcworkspace";
     if ([currentApplicationName isEqual:@"Xcode"]) {
         dispatch_once(&onceToken, ^{
             sharedPlugin = [[self alloc] initWithBundle:plugin];
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(menuDidChange)
+                                                         name:NSMenuDidChangeItemNotification
+                                                       object:nil];
         });
+    }
+}
+
++ (void)menuDidChange
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSMenuDidChangeItemNotification
+                                                  object:nil];
+    
+    [sharedPlugin createMenu];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuDidChange)
+                                                 name:NSMenuDidChangeItemNotification
+                                               object:nil];
+}
+
+- (void)createMenu
+{
+    if (!self.actionItem)
+    {
+        // Create new menu item in Debug
+        NSMenuItem *debugMenuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
+        if (debugMenuItem) {
+            [[debugMenuItem submenu] addItem:[NSMenuItem separatorItem]];
+            self.actionItem = [[NSMenuItem alloc] initWithTitle:@"Add new Location"
+                                                         action:@selector(addNewLocationMenu)
+                                                  keyEquivalent:@""];
+            [[debugMenuItem submenu] addItem:self.actionItem];
+        }
     }
 }
 
@@ -89,17 +124,8 @@ static NSString * const workspaceExt     = @"xcworkspace";
         self.bundle = plugin;
         // Adds all observers
         [self addObservers];
-        // Create new menu item in Debug
-        NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
-        if (menuItem) {
-            [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
-            self.actionItem = [[NSMenuItem alloc] initWithTitle:@"Add new Location"
-                                                         action:@selector(addNewLocationMenu)
-                                                  keyEquivalent:@""];
-            [[menuItem submenu] addItem:self.actionItem];
-            // Init interface
-            [self loadWindow];
-        }
+        // Init interface
+        [self loadWindow];
     }
     return self;
 }
