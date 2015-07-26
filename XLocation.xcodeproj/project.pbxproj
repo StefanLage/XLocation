@@ -502,7 +502,6 @@
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Frameworks",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/XLocation-bvfsktypljbpaqcugmxxgbcspdud/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XLocation/XLocation-Prefix.pch";
@@ -528,7 +527,6 @@
 					"$(inherited)",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks",
 					"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Frameworks",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/XLocation-bvfsktypljbpaqcugmxxgbcspdud/Build/Products/Debug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XLocation/XLocation-Prefix.pch";
