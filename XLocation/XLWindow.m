@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Stefan Lage. All rights reserved.
 //
 
-#import "LWindow.h"
+#import "XLWindow.h"
 
-@implementation LWindow
+@implementation XLWindow
 
 - (BOOL)canBecomeKeyWindow {
     return YES;

@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface LWindow : NSWindow
+@interface XLWindow : NSWindow
 
 @end

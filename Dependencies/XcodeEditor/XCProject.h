@@ -21,7 +21,7 @@
 @class XCSubProjectDefinition;
 @class XCBuildConfiguration;
 
-NSString* const XCProjectNotFoundException;
+static NSString* const XCProjectNotFoundException;
 
 @interface XCProject : NSObject
 {

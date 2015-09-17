@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface LAnnotation : NSObject
+@interface XLAnnotation : NSObject
 
 @property (nonatomic, strong) NSString          * city;
 @property (nonatomic, strong) NSString          * country;

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LWorkspace : NSObject <NSXMLParserDelegate>
+@interface XLWorkspace : NSObject <NSXMLParserDelegate>
 
 // Get all projects contains in a workspace
 //

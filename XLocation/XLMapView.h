@@ -8,7 +8,7 @@
 
 #import <MapKit/MapKit.h>
 
-@interface LMapView : MKMapView
+@interface XLMapView : MKMapView
 
 @property (nonatomic) BOOL isEnable;
 -(void)resetRegion;
