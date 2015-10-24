@@ -1,12 +1,12 @@
 //
-//  LXLocation.m
-//  LXLocation
+//  XLocation.m
+//  XLocation
 //
-//  Created by Stefan Lage on 16/05/14.
-//    Copyright (c) 2014 StefanLage. All rights reserved.
+//  Created by Stefan Lage on 17/09/15.
+//  Copyright (c) 2015 Stefan Lage. All rights reserved.
 //
 
-#import "LXLocation.h"
+#import "XLocation.h"
 // Xcode
 #import "IDEWorkspace.h"
 #import "DVTFilePath.h"
@@ -19,16 +19,14 @@
 // Gpx format
 #import "NSString+Gpx.h"
 // Window
-#import "LWindow.h"
+#import "XLWindow.h"
 // Annotation
-#import "LAnnotation.h"
+#import "XLAnnotation.h"
 // MapView
-#import "LMapView.h"
+#import "XLMapView.h"
 // LWorkspace
-#import "LWorkspace.h"
+#import "XLWorkspace.h"
 
-// Singleton
-static LXLocation *sharedPlugin;
 // Google Map URL Request
 static NSString * const gMapUrlRequestFromAddress     = @"http://maps.google.com/maps/api/geocode/json?address=%@,%@,%@,%@&sensor=false";
 static NSString * const gMapUrlRequestFromCoordinates = @"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false";
@@ -40,15 +38,15 @@ static NSString * const noPointSelected  = @"Please select a location first!";
 static NSString * const generateDone     = @"File %@.gpx created! This one has been added to your current project in the Group named GPX.";
 static NSString * const workspaceExt     = @"xcworkspace";
 
-@interface LXLocation()
+@interface XLocation()
 
-@property (nonatomic, strong) NSBundle    * bundle;
-@property (nonatomic, copy  ) NSString    * currentWorkspaceFilePath;
-@property (nonatomic, copy  ) NSString    * currentXcodeProject;
-@property (nonatomic, strong) NSMenuItem  * actionItem;
-@property (nonatomic, strong) LWindow     * locationsWindow;
-@property (nonatomic, strong) LAnnotation * pAnnotation;
-@property (nonatomic, strong) LWorkspace  * worskspace;
+@property (nonatomic, strong, readwrite) NSBundle     *bundle;
+@property (nonatomic, copy) NSString     * currentWorkspaceFilePath;
+@property (nonatomic, copy) NSString     * currentXcodeProject;
+@property (nonatomic, strong) NSMenuItem   * actionItem;
+@property (nonatomic, strong) XLWindow     * locationsWindow;
+@property (nonatomic, strong) XLAnnotation * pAnnotation;
+@property (nonatomic, strong) XLWorkspace  * worskspace;
 @property (nonatomic) BOOL selectProject;
 @property (nonatomic) BOOL generateFromMap;
 
@@ -62,46 +60,50 @@ static NSString * const workspaceExt     = @"xcworkspace";
 @property (weak) IBOutlet NSButton    * generateBtn;
 @property (weak) IBOutlet NSButton    * cancelMap;
 @property (weak) IBOutlet NSButton    * generateMap;
-@property (weak) IBOutlet LMapView    * mapView;
+@property (weak) IBOutlet XLMapView    * mapView;
 @property (weak) IBOutlet NSTextField * addressLbl;
 @property (weak) IBOutlet NSTabView *tabView;
 
 @end
 
+@implementation XLocation
 
-@implementation LXLocation
-
-+ (void)pluginDidLoad:(NSBundle *)plugin
++ (instancetype)sharedPlugin
 {
-    static dispatch_once_t onceToken;
-    NSString *currentApplicationName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
-    if ([currentApplicationName isEqual:@"Xcode"]) {
-        dispatch_once(&onceToken, ^{
-            sharedPlugin = [[self alloc] initWithBundle:plugin];
-        });
-    }
+    return sharedPlugin;
 }
 
 - (id)initWithBundle:(NSBundle *)plugin
 {
     if (self = [super init]) {
-        // reference to plugin's bundle, for resource acccess
+        // reference to plugin's bundle, for resource access
         self.bundle = plugin;
-        // Adds all observers
-        [self addObservers];
-        // Create new menu item in Debug
-        NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
-        if (menuItem) {
-            [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
-            self.actionItem = [[NSMenuItem alloc] initWithTitle:@"Add new Location"
-                                                         action:@selector(addNewLocationMenu)
-                                                  keyEquivalent:@""];
-            [[menuItem submenu] addItem:self.actionItem];
-            // Init interface
-            [self loadWindow];
-        }
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didApplicationFinishLaunchingNotification:)
+                                                     name:NSApplicationDidFinishLaunchingNotification
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)didApplicationFinishLaunchingNotification:(NSNotification*)noti
+{
+    //removeObserver
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidFinishLaunchingNotification object:nil];
+    
+    // Adds all observers
+    [self addObservers];
+    // Create new menu item in Debug
+    NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Debug"];
+    if (menuItem) {
+        [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
+        self.actionItem = [[NSMenuItem alloc] initWithTitle:@"Add new Location"
+                                                     action:@selector(addNewLocationMenu)
+                                              keyEquivalent:@""];
+        [[menuItem submenu] addItem:self.actionItem];
+        // Init interface
+        [self loadWindow];
+    }
 }
 
 - (void)dealloc
@@ -152,7 +154,7 @@ static NSString * const workspaceExt     = @"xcworkspace";
         self.currentWorkspaceFilePath                 = pathString;
         // Check type of project (Workspace or Xcodeproject)
         if([[representingFilePath.pathString pathExtension] isEqualToString:workspaceExt]){
-            self.worskspace = [[LWorkspace alloc] initWithUrl:representingFilePath.pathString
+            self.worskspace = [[XLWorkspace alloc] initWithUrl:representingFilePath.pathString
                                                   currentPath:pathString];
         }
         // Enable action button
@@ -266,7 +268,7 @@ static NSString * const workspaceExt     = @"xcworkspace";
                                                else{
                                                    dispatch_async(dispatch_get_main_queue(), ^{
                                                        // Adds annotation
-                                                       self.pAnnotation = [[LAnnotation alloc] initWithCity:city
+                                                       self.pAnnotation = [[XLAnnotation alloc] initWithCity:city
                                                                                                     country:country
                                                                                                     address:address
                                                                                                     zipCode:zipCode
@@ -419,12 +421,12 @@ static NSString * const workspaceExt     = @"xcworkspace";
  */
 - (void) loadWindow{
     NSArray *topLevelObjects = nil;
-    [self.bundle loadNibNamed:@"LWindow" owner:self topLevelObjects:&topLevelObjects];
+    [self.bundle loadNibNamed:@"XLWindow" owner:self topLevelObjects:&topLevelObjects];
     for (id object in topLevelObjects) {
         if ([object isKindOfClass:[NSWindow class]]) {
             NSWindow *window = (NSWindow *)object;
             if ([window.identifier isEqualToString:@"LocationWindow"]) {
-                self.locationsWindow = (LWindow*)window;
+                self.locationsWindow = (XLWindow*)window;
             }
         }
     }
@@ -463,12 +465,12 @@ static NSString * const workspaceExt     = @"xcworkspace";
     [self.postalCodeField setStringValue:@""];
     [self.countryField setStringValue:@""];
     [self.filenameField becomeFirstResponder];
-
+    
     // Clean the map
     [self cleanMap];
     // Reset map region
     [self.mapView resetRegion];
-
+    
     // Enable button
     [self enableDisableActions:YES];
 }
@@ -573,7 +575,7 @@ static NSString * const workspaceExt     = @"xcworkspace";
 
 -(void) getWorkspace{
     // Ask to user in which projects he'd like to add gpx file
-    LWorkspaceView *workspaceView = [[LWorkspaceView alloc] initWithFrame:[self.tabView frame]
+    XLWorkspaceView *workspaceView = [[XLWorkspaceView alloc] initWithFrame:[self.tabView frame]
                                                                 workspace:self.worskspace];
     [workspaceView setBlurRadius:4.0];
     [workspaceView setSaturationFactor:2.0];
@@ -588,7 +590,7 @@ static NSString * const workspaceExt     = @"xcworkspace";
 
 #pragma mark - LWorkspace delegate methods
 
--(void)goBack:(LWorkspaceView *)view{
+-(void)goBack:(XLWorkspaceView *)view{
     // Set default button to init value
     if(self.generateFromMap)
         [self.locationsWindow setDefaultButtonCell:[self.generateMap cell]];
@@ -599,7 +601,7 @@ static NSString * const workspaceExt     = @"xcworkspace";
     [self enableDisableActions:YES];
 }
 
--(void)projectSelected:(LWorkspaceView *)view index:(NSInteger)index{
+-(void)projectSelected:(XLWorkspaceView *)view index:(NSInteger)index{
     // Get project infos
     NSDictionary *project         = [self.worskspace.projects objectAtIndex:index];
     NSString *pathString          = [[project objectForKey:@"location"] stringByReplacingOccurrencesOfString:[project objectForKey:@"filename"]

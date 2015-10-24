@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 StefanLage. All rights reserved.
 //
 
-#import "LWorkspace.h"
+#import "XLWorkspace.h"
 
 static NSString * const workspaceContent = @"contents.xcworkspacedata";
 static NSString * const fileRefElement   = @"FileRef";
 static NSString * const locationKey      = @"location";
 static NSString * const locationNoise    = @"group:";
 
-@implementation LWorkspace
+@implementation XLWorkspace
 
 -(id)initWithUrl:(NSString*)url currentPath:(NSString*)path{
     self = [super init];

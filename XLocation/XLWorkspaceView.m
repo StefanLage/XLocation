@@ -6,22 +6,22 @@
 //  Copyright (c) 2014 StefanLage. All rights reserved.
 //
 
-#import "LWorkspaceView.h"
+#import "XLWorkspaceView.h"
 
 static NSString * const defaultMessage = @"It seems you're using a Workspace.\nPlease select in which project you'd like to add the GPX:";
 static NSString * const goBackTitle    = @"Go Back";
 static NSString * const continueTitle  = @"Continue";
 
-@interface LWorkspaceView ()
+@interface XLWorkspaceView ()
 
 @property (nonatomic, strong) NSButton *back;
 @property (nonatomic, strong) NSMatrix *projectsMatrix;
 
 @end
 
-@implementation LWorkspaceView
+@implementation XLWorkspaceView
 
-- (id)initWithFrame:(NSRect)frame workspace:(LWorkspace*)workspace
+- (id)initWithFrame:(NSRect)frame workspace:(XLWorkspace*)workspace
 {
     self = [super initWithFrame:frame];
     if(self){

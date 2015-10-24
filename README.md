@@ -65,12 +65,12 @@ If you want to uninstall XLocation, remove XLocation in Plug-ins directory.
 
 ##Dependency
 
-[`XcodeEditor`](https://github.com/jasperblues/XcodeEditor) to manipulate Xcode project files.
+[`XcodeEditor`](https://github.com/jasperblues/XcodeEditor) to manipulate Xcode project files, made by [`AppsQuick.ly`](https://github.com/appsquickly).
 
 
 ##License
 
-	Copyright (c) 2014 stefanlage
+	Copyright (c) 2014 Stefan Lage
 
 	Permission is hereby granted, free of charge, to any person obtaining
 	a copy of this software and associated documentation files (the

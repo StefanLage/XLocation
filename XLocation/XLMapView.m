@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 StefanLage. All rights reserved.
 //
 
-#import "LMapView.h"
+#import "XLMapView.h"
 
-@interface LMapView ()
+@interface XLMapView ()
 
 @property (nonatomic) MKCoordinateRegion bkRegion;
 
 @end
 
-@implementation LMapView
+@implementation XLMapView
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 StefanLage. All rights reserved.
 //
 
-#import "LAnnotation.h"
+#import "XLAnnotation.h"
 
-@implementation LAnnotation
+@implementation XLAnnotation
 
 -(id)initWithCity:(NSString*)ci country:(NSString*)co address:(NSString*)ad zipCode:(NSString*)zip location:(CLLocationCoordinate2D)loc{
     self = [super init];
