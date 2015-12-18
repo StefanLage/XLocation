@@ -11,7 +11,18 @@
 @implementation NSString (Gpx)
 
 +(NSString *)generateGpxWithFilename:(NSString*) filename latitude:(NSNumber *)lat longitude:(NSNumber *)lng address:(NSString *)address city:(NSString *)city country:(NSString *)country zip:(NSString *)zipCode{
-    return [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n\
+
+    NSDateFormatter *rfc3339DateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+
+    [rfc3339DateFormatter setLocale:enUSPOSIXLocale];
+    [rfc3339DateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+    [rfc3339DateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+
+    NSString *dateString = [rfc3339DateFormatter stringFromDate:[NSDate new]];
+
+    return [NSString stringWithFormat:
+@"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n\
 <gpx\n\
 xmlns=\"http://www.topografix.com/GPX/1/1\"\n\
 xmlns:gpxx = \"http://www.garmin.com/xmlschemas/GpxExtensions/v3\"\n\
@@ -35,7 +46,8 @@ creator=\"StefanLage\">\n\
             </gpxx:WaypointExtension>\n\
         </extensions>\n\
     </wpt>\n\
-</gpx>", lat, lng, [NSDate new], filename, address, city, country, zipCode];
+</gpx>",
+    lat, lng, dateString, filename, address, city, country, zipCode];
 }
 
 @end
