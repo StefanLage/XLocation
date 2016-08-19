@@ -11,6 +11,11 @@
 @implementation NSString (Gpx)
 
 +(NSString *)generateGpxWithFilename:(NSString*) filename latitude:(NSNumber *)lat longitude:(NSNumber *)lng address:(NSString *)address city:(NSString *)city country:(NSString *)country zip:(NSString *)zipCode{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+    NSString * utcDate = [dateFormatter stringFromDate:[NSDate date]];
+    
     return [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n\
             <gpx\n\
             xmlns=\"http://www.topografix.com/GPX/1/1\"\n\
@@ -35,7 +40,7 @@
                         </gpxx:WaypointExtension>\n\
                     </extensions>\n\
                 </wpt>\n\
-            </gpx>", lat, lng, [NSDate new], filename, address, city, country, zipCode];
+            </gpx>", lat, lng, utcDate, filename, address, city, country, zipCode];
 }
 
 @end
